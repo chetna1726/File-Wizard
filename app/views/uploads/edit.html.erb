@@ -1,0 +1,21 @@
+<h1>Share Upload</h1>
+Shared with: <%= @upload.visible? ? 'Public' : User.where(id: SharedUpload.where(upload: @upload).pluck(:user_id)).pluck(:name) %>
+<%= form_tag upload_share_path(@upload) do |form| %>
+
+  <div class="field">
+    <%= label_tag :users %>
+    <%= select_tag :user_ids, options_for_select(User.where.not(id: [current_user.id]).pluck(:name, :id)), multiple: true %>
+  </div>
+
+  <div>
+    <%= label_tag 'Make Public' %>
+    <%= check_box_tag :visible, value = "1", checked = false %>
+  </div>
+
+  <div class="actions">
+    <%= submit_tag 'Share' %>
+  </div>
+<% end %>
+
+
+<%= link_to 'Back', users_path %>

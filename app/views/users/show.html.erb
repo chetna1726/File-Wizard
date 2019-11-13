@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+<% if current_user %>
+  Logged in as <%= current_user.email %>.
+  <%= link_to 'Log Out', logout_path %>
+
+  <p>
+    <strong>Name:</strong>
+    <%= @user.name %>
+  </p>
+
+  <p>
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </p>
+
+  <p><%= link_to 'View Uploads', uploads_path %></p>
+  <p><%= link_to 'View Shared Uploads', uploads_path(shared: true) %></p>
+  <p><%= link_to 'Upload File', new_upload_path %></p>
+  <p><%= link_to 'Edit', edit_user_path(@user) %></p>
+<% else %>
+  <%= link_to 'Sign Up', signup_path %> or 
+  <%= link_to 'Log In', login_path %>
+<% end %>
+<p id=”notice”><%= notice %></p>

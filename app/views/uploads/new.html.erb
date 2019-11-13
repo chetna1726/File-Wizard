@@ -1,0 +1,6 @@
+<p id="notice"><%= notice %></p>
+<h1>New Upload</h1>
+
+<%= render 'form', upload: current_user.uploads.build %>
+
+<%= link_to 'Back', uploads_path %>

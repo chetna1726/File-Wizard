@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Uploads</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>File</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @uploads.each do |upload| %>
+      <tr>
+        <td><%= upload.title %></td>
+        <td><%= upload.desc %></td>
+        <td>
+          <% if upload.file %>
+            <%= link_to image_tag(upload.file.url, size: '20x20'), upload.file.url, target: '_blank' %>
+          <% else %> 
+            <%= link_to 'Open PDF', upload.file.url, target: '_blank' %>
+          <% end %>
+        </td>
+        <% if upload.user == current_user %>
+          <td><%= link_to 'Share', edit_upload_path(upload) %></td>
+          <td><%= link_to 'Delete', upload, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Upload', new_upload_path %>
+<%= link_to 'Back', user_path(current_user) %>
